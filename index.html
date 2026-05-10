@@ -1,2 +1,36 @@
-# kahnetop.github.io
-website Test
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio 3D</title>
+
+    <!-- On récupère le script directement chez Marmoset -->
+    <script src="https://viewer.marmoset.co/main/mviewer.js"></script>
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #111;
+        }
+        /* Ce style permet au viewer de prendre toute la page */
+        #marmoset-container {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- L'endroit où le modèle va s'afficher -->
+    <div id="marmoset-container"></div>
+
+    <script>// C'est ici que la magie opère
+        // ATTENTION : Remplacez "votre_modele.mview" par le nom EXACT de votre fichier
+        var myViewer = new mviewer.Viewer("marmoset-container", "plushLune.mview");</script>
+
+</body>
+</html>
