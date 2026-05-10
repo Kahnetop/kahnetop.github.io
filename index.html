@@ -1,31 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1</title>
+    <meta charset="UTF-8">
+    <title>Portfolio 3D</title>
     <style>
-        body, html {
+        /* On s'assure que le container prend toute la place sans marges */
+        html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
             background: #000;
-            overflow: hidden;
         }
-        /* Cette classe est utilisée par le script Marmoset */
-        .marmoset-viewer {
-            width: 100%;
-            height: 100%;
+
+        #viewer-container {
+            width: 100vw;
+            height: 100vh;
         }
     </style>
-    <!-- Ton fichier local -->
-    <script src="marmoset.js"></script>
 </head>
 <body>
-    <div class="marmoset-viewer" data-source="plushLune.txt" data-autoStart="true"></div>
 
-    <!-- On déplace le script ici -->
+    <div id="viewer-container"></div>
+
+    <!-- On charge le script APRES le div pour être sûr qu'il trouve le container -->
     <script src="marmoset.js"></script>
+
+    <script>
+        // La méthode officielle de haut niveau
+        var params = {
+            width: "100%",
+            height: "100%",
+            autoStart: true,
+            fullScreen: true,
+            pageBackgroundColor: "#000",
+            image: "", // Optionnel : une image d'aperçu avant le chargement
+        };
+
+        // Sur leur site, ils utilisent souvent l'appel direct au constructeur WebViewer
+        try {
+            // C'est l'ordre exact utilisé dans les versions récentes du moteur
+            marmoset.embed("viewer-container", "plushLune.txt", params);
+        } catch (e) {
+            console.log("Tentative alternative...");
+            // Si la première échoue, on tente la méthode "Auto-Init"
+            var v = new marmoset.WebViewer(params, "plushLune.txt");
+            document.getElementById("viewer-container").appendChild(v.domRoot);
+        }
+    </script>
 </body>
 </html>
