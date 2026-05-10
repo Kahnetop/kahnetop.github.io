@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3</title>
+    <title>4</title>
 
     <style>
         /* Setup de la page pour un plein écran propre */
@@ -33,22 +33,22 @@
     <script>
         window.onload = function () {
             if (window.marmoset) {
-                // On définit d'abord les réglages
+                // On définit les paramètres de base
                 var params = {
-                    width: "100%",
-                    height: "100%",
+                    width: 100, // On utilise des nombres plutôt que des strings pour la sécurité
+                    height: 100,
                     autoStart: true,
                     fullScreen: true,
                     pageBackgroundColor: "#000"
                 };
 
-                // ATTENTION : Ici on inverse l'ordre pour corriger ton erreur TypeError
-                // On donne : (ID du div, OPTIONS, CHEMIN du modèle)
-                marmoset.embed("marmoset-viewer", params, { url: "plushLune.txt" });
+                // LA SYNTAXE LA PLUS ROBUSTE :
+                // (ID du div, Chemin du fichier, Paramètres)
+                marmoset.embed("marmoset-viewer", "plushLune.txt", params);
 
-                console.log("Tentative finale avec inversion des paramètres...");
+                console.log("Chargement direct de plushLune.mview...");
             } else {
-                console.error("marmoset.js est introuvable.");
+                console.error("marmoset.js manquant.");
             }
         };
     </script>
