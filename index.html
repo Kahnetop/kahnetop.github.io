@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test1</title>
-
-    <!-- Chargement du moteur Marmoset -->
-    <script src="https://viewer.marmoset.co/main/mviewer.js"></script>
+    <title>Portfolio 3D | PlushLune</title>
 
     <style>
-        /* Supprime les marges et met le fond en noir */
+        /* Setup de la page pour un plein écran propre */
         body, html {
             margin: 0;
             padding: 0;
@@ -18,30 +15,43 @@
             background-color: #000;
             overflow: hidden;
         }
-        /* Le container prend tout l'écran*/
-        #marmoset-container {
+
+        #marmoset-viewer {
             width: 100vw;
             height: 100vh;
         }
     </style>
+
+    <!-- Appel du fichier local que tu as ajouté sur ton GitHub -->
+    <script src="marmoset.js"></script>
 </head>
 <body>
 
-    <!-- Emplacement du viewer -->
-    <div id="marmoset-container"></div>
+    <!-- Le conteneur où le modèle va s'afficher -->
+    <div id="marmoset-viewer"></div>
 
     <script>
-        function loadMarmoset() {
-            if (typeof mviewer !== 'undefined') {
-                // Si le moteur est prêt, on lance le modèle
-                var myViewer = new mviewer.Viewer("marmoset-container", "plushLune.mview");
-            } else {
-                // Sinon, on attend encore 100ms et on réessaye
-                setTimeout(loadMarmoset, 100);
-            }
-        }
+        window.onload = function () {
+            // On vérifie que marmoset.js est bien présent
+            if (window.marmoset) {
+                // Configuration et chargement du modèle
+                marmoset.embed("marmoset-viewer", {
+                    width: "100%",
+                    height: "100%",
+                    autoStart: true,
+                    fullScreen: true,
+                    pageBackgroundColor: "#000"
+                });
 
-        window.onload = loadMarmoset;
+                // IMPORTANT : Le nom exact de ton fichier
+                marmoset.load("plushLune.mview");
+
+                console.log("Moteur Marmoset chargé avec succès !");
+            } else {
+                console.error("Erreur : marmoset.js est introuvable à la racine.");
+                document.body.innerHTML = "<h2 style='color:white; text-align:center;'>Erreur : marmoset.js manquant sur le serveur.</h2>";
+            }
+        };
     </script>
 
 </body>
