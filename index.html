@@ -1,12 +1,47 @@
+Voici le code complet et corrigé pour ton fichier index.html.
+
+J'ai ajouté une petite sécurité (window.onload) pour être sûr que le script de Marmoset est bien chargé avant de lancer ton modèle.
+
+HTML
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio 3D - PlushLune</title>
+
+    <!-- Chargement du moteur Marmoset -->
+    <script src="https://viewer.marmoset.co/main/mviewer.js"></script>
+
+    <style>
+        /* Supprime les marges et met le fond en noir */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            overflow: hidden;
+        }
+        /* Le container prend tout l'écran */
+        #marmoset-container {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
 
-    <iframe src="plushlune.html" allowfullscreen="true" height="467" width="830"></iframe>
+    <!-- Emplacement du viewer -->
+    <div id="marmoset-container"></div>
 
+    <script>
+        // On attend que la page soit totalement chargée
+        window.onload = function () {
+            // "plushLune.mview" doit être le nom exact de ton fichier sur GitHub
+            var myViewer = new mviewer.Viewer("marmoset-container", "plushLune.mview");
+        };
+    </script>
 
 </body>
 </html>
