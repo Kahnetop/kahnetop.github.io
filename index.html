@@ -18,7 +18,7 @@
             background-color: #000;
             overflow: hidden;
         }
-        /* Le container prend tout l'écran */
+        /* Le container prend tout l'écran*/
         #marmoset-container {
             width: 100vw;
             height: 100vh;
@@ -31,11 +31,17 @@
     <div id="marmoset-container"></div>
 
     <script>
-        // On attend que la page soit totalement chargée
-        window.onload = function () {
-            // "plushLune.mview" doit être le nom exact de ton fichier sur GitHub
-            var myViewer = new mviewer.Viewer("marmoset-container", "plushLune.mview");
-        };
+        function loadMarmoset() {
+            if (typeof mviewer !== 'undefined') {
+                // Si le moteur est prêt, on lance le modèle
+                var myViewer = new mviewer.Viewer("marmoset-container", "plushLune.mview");
+            } else {
+                // Sinon, on attend encore 100ms et on réessaye
+                setTimeout(loadMarmoset, 100);
+            }
+        }
+
+        window.onload = loadMarmoset;
     </script>
 
 </body>
