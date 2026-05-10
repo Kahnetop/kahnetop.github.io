@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio 3D | PlushLune</title>
+    <title>2</title>
 
     <style>
         /* Setup de la page pour un plein écran propre */
@@ -33,20 +33,22 @@
     <script>
         window.onload = function () {
             if (window.marmoset) {
-                // On combine l'initialisation et le chargement du fichier
-                // On ajoute "./" devant le nom pour forcer la recherche dans le dossier actuel
-                marmoset.embed("marmoset-viewer", {
+                // 1. On initialise le viewer dans le div "marmoset-viewer"
+                // 2. On passe l'URL du fichier .mview dans les paramètres
+                var params = {
                     width: "100%",
                     height: "100%",
                     autoStart: true,
                     fullScreen: true,
-                    pageBackgroundColor: "#000",
-                    url: "./plushLune.mview" // On définit la source ici directement
-                });
+                    pageBackgroundColor: "#000"
+                };
 
-                console.log("Tentative de chargement du modèle...");
+                // LA LIGNE CRUCIALE : On lie l'ID du div au fichier
+                marmoset.embed("marmoset-viewer", "./plushLune.mview", params);
+
+                console.log("Chargement lancé pour : ./plushLune.mview");
             } else {
-                console.error("marmoset.js non trouvé.");
+                console.error("marmoset.js est manquant.");
             }
         };
     </script>
